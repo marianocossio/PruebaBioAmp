@@ -26,6 +26,7 @@ private slots:
 
     void selectPort(QAction* port);
     void showData(unsigned char data);
+    void portClosed();
 
 private:
     Ui::Principal *ui;

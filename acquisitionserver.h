@@ -19,6 +19,8 @@ public:
 
 signals:
     void dataReceived(unsigned char data);
+    void portOpened();
+    void portClosed();
 
 protected:
     void run() override;

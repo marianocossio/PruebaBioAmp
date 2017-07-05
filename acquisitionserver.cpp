@@ -29,20 +29,23 @@ bool AcquisitionServer::startPort(QString portName)
 
     result = portBioAmp.isOpen();
 
-    // ---------------------------
-
-    if (result)
-    {
-        portBioAmp.write("x1060100X");
-        portBioAmp.write("2345678");
-    }
-
-    // ---------------------------
-
     if (!isRunning())
         start(LowPriority);
     else
         condition.wakeOne();
+
+    // ---------------------------
+
+    if (result)
+    {
+        abort = false;
+        //portBioAmp.write("x1060100X");
+        //portBioAmp.write("2345678");
+
+        emit portOpened();
+    }
+
+    // ---------------------------
 
     return result;
 }
@@ -51,9 +54,17 @@ void AcquisitionServer::stopPort()
 {
     mutex.lock();
 
-    portBioAmp.close();
+    if (portBioAmp.isOpen())
+        portBioAmp.close();
+
+    abort = true;
+    condition.wakeOne();
 
     mutex.unlock();
+
+    wait();
+
+    emit portClosed();
 }
 
 void AcquisitionServer::run()
@@ -81,5 +92,7 @@ void AcquisitionServer::run()
 
             emit dataReceived(readByte);
         }
+
+        emit dataReceived(255);
     }
 }

@@ -18,6 +18,7 @@ Principal::Principal(QWidget *parent) :
 
     connect(ui->menu_Puerto, SIGNAL(triggered(QAction*)), this, SLOT(selectPort(QAction*)));
     connect(&acquisitionServer, SIGNAL(dataReceived(unsigned char)), this, SLOT(showData(unsigned char)));
+    connect(&acquisitionServer, SIGNAL(portClosed()), this, SLOT(portClosed()));
 }
 
 Principal::~Principal()
@@ -38,8 +39,6 @@ void Principal::on_startPushButton_clicked()
 void Principal::on_stopPushButton_clicked()
 {
     acquisitionServer.stopPort();
-
-    ui->readByteLabel->setText("Puerto Cerrado");
 }
 
 void Principal::selectPort(QAction *port)
@@ -55,4 +54,9 @@ void Principal::selectPort(QAction *port)
 void Principal::showData(unsigned char data)
 {
     ui->readByteLabel->setText(QString::number((int) data));
+}
+
+void Principal::portClosed()
+{
+    ui->readByteLabel->setText("Puerto Cerrado");
 }
