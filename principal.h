@@ -6,7 +6,10 @@
 #include <QtSerialPort/QSerialPortInfo>
 #include <QList>
 
+#include <QResizeEvent>
+
 #include "acquisitionserver.h"
+#include "graph.h"
 
 namespace Ui {
 class Principal;
@@ -25,8 +28,13 @@ private slots:
     void on_stopPushButton_clicked();
 
     void selectPort(QAction* port);
-    void showData(unsigned char data);
+    void showData(char data);
     void portClosed();
+
+    void on_sendPushButton_clicked();
+
+protected:
+    void resizeEvent(QResizeEvent *event);
 
 private:
     Ui::Principal *ui;
@@ -36,6 +44,8 @@ private:
     AcquisitionServer acquisitionServer;
 
     QString portName;
+
+    int divisor, lastData;
 };
 
 #endif // PRINCIPAL_H

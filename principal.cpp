@@ -16,8 +16,12 @@ Principal::Principal(QWidget *parent) :
         ui->menu_Puerto->actions()[ui->menu_Puerto->actions().size() - 1]->setChecked(false);
     }
 
+    //ui->readByteLabel->setStyleSheet("QLabel { background-color : black; color : grey; }");
+
+    divisor = 0;
+
     connect(ui->menu_Puerto, SIGNAL(triggered(QAction*)), this, SLOT(selectPort(QAction*)));
-    connect(&acquisitionServer, SIGNAL(dataReceived(unsigned char)), this, SLOT(showData(unsigned char)));
+    connect(&acquisitionServer, SIGNAL(dataReceived(char)), this, SLOT(showData(char)));
     connect(&acquisitionServer, SIGNAL(portClosed()), this, SLOT(portClosed()));
 }
 
@@ -51,12 +55,48 @@ void Principal::selectPort(QAction *port)
     portName = port->text();
 }
 
-void Principal::showData(unsigned char data)
+void Principal::showData(char data)
 {
-    ui->readByteLabel->setText(QString::number((int) data));
+    int lim_sup = 75;
+    int lim_inf = 50;
+
+    if (divisor == 0)
+    {
+        if (((data > lim_inf) && (data < lim_sup)) || ((data > (-lim_sup)) && (data < (-lim_inf))))
+        {
+            ui->readByteLabel->setText(QString::number((int) data));
+            ui->openGLWidget->addData((int) data);
+
+            lastData = (int) data;
+        }
+        else
+        {
+            ui->readByteLabel->setText(QString::number(lastData));
+            ui->openGLWidget->addData(lastData);
+        }
+    }
+
+    divisor += 1;
+    if (divisor == 10)
+        divisor = 0;
 }
 
 void Principal::portClosed()
 {
     ui->readByteLabel->setText("Puerto Cerrado");
+}
+
+void Principal::on_sendPushButton_clicked()
+{
+    //ui->readByteLabel->setText("");
+    acquisitionServer.write(ui->sendLineEdit->text().toUtf8());
+}
+
+void Principal::resizeEvent(QResizeEvent *event)
+{
+    //ui->readByteLabel->move(10, 80);
+    //ui->readByteLabel->resize(width() - 20, height() - 120);
+
+    ui->openGLWidget->move(10, 80);
+    ui->openGLWidget->resize(width() - 20, height() - 120);
 }

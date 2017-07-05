@@ -6,52 +6,98 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>406</width>
-    <height>300</height>
+    <width>468</width>
+    <height>451</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Principal</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QPushButton" name="startPushButton">
-    <property name="geometry">
-     <rect>
-      <x>60</x>
-      <y>110</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>&amp;Comenzar</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="readByteLabel">
     <property name="geometry">
      <rect>
-      <x>260</x>
-      <y>110</y>
-      <width>131</width>
+      <x>300</x>
+      <y>20</y>
+      <width>151</width>
       <height>31</height>
      </rect>
     </property>
     <property name="text">
      <string>Puerto Cerrado</string>
     </property>
+    <property name="textFormat">
+     <enum>Qt::PlainText</enum>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
+    </property>
    </widget>
-   <widget class="QPushButton" name="stopPushButton">
+   <widget class="Graph" name="openGLWidget">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>150</y>
-      <width>75</width>
-      <height>23</height>
+      <x>10</x>
+      <y>80</y>
+      <width>451</width>
+      <height>331</height>
      </rect>
     </property>
-    <property name="text">
-     <string>&amp;Paraddr</string>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>261</width>
+      <height>77</height>
+     </rect>
     </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetMinAndMaxSize</enum>
+     </property>
+     <property name="leftMargin">
+      <number>10</number>
+     </property>
+     <property name="topMargin">
+      <number>10</number>
+     </property>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QPushButton" name="startPushButton">
+         <property name="text">
+          <string>&amp;Comenzar</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="stopPushButton">
+         <property name="text">
+          <string>&amp;Parar</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QLineEdit" name="sendLineEdit"/>
+       </item>
+       <item>
+        <widget class="QPushButton" name="sendPushButton">
+         <property name="text">
+          <string>&amp;Enviar</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -59,7 +105,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>406</width>
+     <width>468</width>
      <height>26</height>
     </rect>
    </property>
@@ -70,17 +116,15 @@
    </widget>
    <addaction name="menu_Puerto"/>
   </widget>
-  <widget class="QToolBar" name="mainToolBar">
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-  </widget>
-  <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>Graph</class>
+   <extends>QOpenGLWidget</extends>
+   <header>graph.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

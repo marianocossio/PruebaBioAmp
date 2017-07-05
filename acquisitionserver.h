@@ -3,6 +3,7 @@
 
 #include <QThread>
 #include <QSerialPort>
+#include <QByteArray>
 #include <QMutex>
 #include <QWaitCondition>
 
@@ -16,11 +17,15 @@ public:
 
     bool startPort(QString portName);
     void stopPort();
+    void write(QByteArray data);
 
 signals:
-    void dataReceived(unsigned char data);
+    void dataReceived(char data);
     void portOpened();
     void portClosed();
+
+public slots:
+    void setBaudRate(long baudRate);
 
 protected:
     void run() override;
@@ -31,8 +36,8 @@ private:
 
     QSerialPort portBioAmp;
 
-    unsigned char readByte;
     bool abort;
+    long baudRate;
 };
 
 #endif // ACQUISITIONSERVER_H

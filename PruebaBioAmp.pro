@@ -26,11 +26,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         principal.cpp \
-    acquisitionserver.cpp
+    acquisitionserver.cpp \
+    graph.cpp
 
 HEADERS += \
         principal.h \
-    acquisitionserver.h
+    acquisitionserver.h \
+    graph.h
 
 FORMS += \
         principal.ui
