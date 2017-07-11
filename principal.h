@@ -1,10 +1,13 @@
 #ifndef PRINCIPAL_H
 #define PRINCIPAL_H
 
+#include <fstream>
+
 #include <QMainWindow>
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
 #include <QList>
+#include <QVector>
 
 #include <QResizeEvent>
 
@@ -28,7 +31,7 @@ private slots:
     void on_stopPushButton_clicked();
 
     void selectPort(QAction* port);
-    void showData(char data);
+    void showData(unsigned char data);
     void portClosed();
 
     void on_sendPushButton_clicked();
@@ -44,8 +47,12 @@ private:
     AcquisitionServer acquisitionServer;
 
     QString portName;
+    QVector<int> channels;
 
-    int divisor, lastData;
+    int byteNumber;
+    bool newWord;
+
+    std::ofstream salida;
 };
 
 #endif // PRINCIPAL_H

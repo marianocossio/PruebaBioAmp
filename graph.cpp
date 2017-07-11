@@ -2,15 +2,17 @@
 
 Graph::Graph(QWidget *parent = 0) : QOpenGLWidget(parent)
 {
-
+    localSignals.resize(8);
 }
 
-void Graph::addData(int data)
+void Graph::addData(QVector<int> data)
 {
-    if (signal.size() >= width())
-        signal.clear();
+    if (localSignals[0].size() >= width())
+        for (int index = 0; index < localSignals.size(); index++)
+            localSignals[index].clear();
 
-    signal.push_back(data);
+    for (int index = 0; index < localSignals.size(); index++)
+        localSignals[index].push_back(data[index]);
 
     update();
 }
@@ -22,11 +24,11 @@ void Graph::initializeGL()
 
 void Graph::resizeGL(int w, int h)
 {
-    glViewport(0, 0, w, h);
+    glViewport(0, 0, w, h / localSignals.size());
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(0.0f, w * 1.0f, -100.0f, 100.0f, -1.0f, 1.0f);
+    glOrtho(0.0f, w * 1.0f, -1.0f, 1.0f, -1.0f, 1.0f);
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -34,17 +36,40 @@ void Graph::resizeGL(int w, int h)
 
 void Graph::paintGL()
 {
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    for (int index = 0; index < localSignals.size(); index++)
+        printSignal(index);
+
+    glFlush();
+}
+
+void Graph::printSignal(int signalIndex)
+{
+    glViewport(0, signalIndex * (height() / localSignals.size()), width(), height() / localSignals.size());
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(0.0f, width() * 1.0f, -1.0f, 1.0f, -1.0f, 1.0f);
+
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
+    glClear(GL_DEPTH_BUFFER_BIT);
+
     glPushMatrix();
 
     glBegin(GL_LINES);
 
     glColor3f(0.0f, 1.0f, 0.0f);
 
-    for (int i = 0; i < signal.size() - 1; i++)
+    for (int i = 0; i < localSignals[signalIndex].size() - 1; i++)
     {
-        glVertex3f(i * 1.0f, signal[i] * 1.0f, 0.0f);
-        glVertex3f((i + 1) * 1.0f, signal[i + 1] * 1.0f, 0.0f);
+        glVertex3f(i * 1.0f, localSignals[signalIndex][i] / (90000 * 1.0f), 0.0f);
+        glVertex3f((i + 1) * 1.0f, localSignals[signalIndex][i + 1] / (90000 * 1.0f), 0.0f);
     }
 
     glEnd();
+
+    glPopMatrix();
 }

@@ -31,9 +31,8 @@ class Ui_Principal
 {
 public:
     QWidget *centralWidget;
-    QLabel *readByteLabel;
     Graph *openGLWidget;
-    QWidget *widget;
+    QWidget *layoutWidget;
     QHBoxLayout *horizontalLayout_2;
     QVBoxLayout *verticalLayout;
     QPushButton *startPushButton;
@@ -41,6 +40,7 @@ public:
     QVBoxLayout *verticalLayout_2;
     QLineEdit *sendLineEdit;
     QPushButton *sendPushButton;
+    QLabel *readByteLabel;
     QMenuBar *menuBar;
     QMenu *menu_Puerto;
 
@@ -51,19 +51,13 @@ public:
         Principal->resize(468, 451);
         centralWidget = new QWidget(Principal);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        readByteLabel = new QLabel(centralWidget);
-        readByteLabel->setObjectName(QStringLiteral("readByteLabel"));
-        readByteLabel->setGeometry(QRect(300, 20, 151, 31));
-        readByteLabel->setTextFormat(Qt::PlainText);
-        readByteLabel->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop);
-        readByteLabel->setWordWrap(true);
         openGLWidget = new Graph(centralWidget);
         openGLWidget->setObjectName(QStringLiteral("openGLWidget"));
         openGLWidget->setGeometry(QRect(10, 80, 451, 331));
-        widget = new QWidget(centralWidget);
-        widget->setObjectName(QStringLiteral("widget"));
-        widget->setGeometry(QRect(0, 0, 261, 77));
-        horizontalLayout_2 = new QHBoxLayout(widget);
+        layoutWidget = new QWidget(centralWidget);
+        layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
+        layoutWidget->setGeometry(QRect(0, 0, 451, 77));
+        horizontalLayout_2 = new QHBoxLayout(layoutWidget);
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
@@ -72,13 +66,20 @@ public:
         verticalLayout = new QVBoxLayout();
         verticalLayout->setSpacing(6);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        startPushButton = new QPushButton(widget);
+        startPushButton = new QPushButton(layoutWidget);
         startPushButton->setObjectName(QStringLiteral("startPushButton"));
+        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(startPushButton->sizePolicy().hasHeightForWidth());
+        startPushButton->setSizePolicy(sizePolicy);
 
         verticalLayout->addWidget(startPushButton);
 
-        stopPushButton = new QPushButton(widget);
+        stopPushButton = new QPushButton(layoutWidget);
         stopPushButton->setObjectName(QStringLiteral("stopPushButton"));
+        sizePolicy.setHeightForWidth(stopPushButton->sizePolicy().hasHeightForWidth());
+        stopPushButton->setSizePolicy(sizePolicy);
 
         verticalLayout->addWidget(stopPushButton);
 
@@ -88,18 +89,33 @@ public:
         verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setSpacing(6);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
-        sendLineEdit = new QLineEdit(widget);
+        sendLineEdit = new QLineEdit(layoutWidget);
         sendLineEdit->setObjectName(QStringLiteral("sendLineEdit"));
+        sizePolicy.setHeightForWidth(sendLineEdit->sizePolicy().hasHeightForWidth());
+        sendLineEdit->setSizePolicy(sizePolicy);
 
         verticalLayout_2->addWidget(sendLineEdit);
 
-        sendPushButton = new QPushButton(widget);
+        sendPushButton = new QPushButton(layoutWidget);
         sendPushButton->setObjectName(QStringLiteral("sendPushButton"));
+        QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Fixed);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(sendPushButton->sizePolicy().hasHeightForWidth());
+        sendPushButton->setSizePolicy(sizePolicy1);
 
         verticalLayout_2->addWidget(sendPushButton);
 
 
         horizontalLayout_2->addLayout(verticalLayout_2);
+
+        readByteLabel = new QLabel(layoutWidget);
+        readByteLabel->setObjectName(QStringLiteral("readByteLabel"));
+        readByteLabel->setTextFormat(Qt::PlainText);
+        readByteLabel->setAlignment(Qt::AlignCenter);
+        readByteLabel->setWordWrap(true);
+
+        horizontalLayout_2->addWidget(readByteLabel);
 
         Principal->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(Principal);
@@ -119,10 +135,10 @@ public:
     void retranslateUi(QMainWindow *Principal)
     {
         Principal->setWindowTitle(QApplication::translate("Principal", "Principal", Q_NULLPTR));
-        readByteLabel->setText(QApplication::translate("Principal", "Puerto Cerrado", Q_NULLPTR));
         startPushButton->setText(QApplication::translate("Principal", "&Comenzar", Q_NULLPTR));
         stopPushButton->setText(QApplication::translate("Principal", "&Parar", Q_NULLPTR));
         sendPushButton->setText(QApplication::translate("Principal", "&Enviar", Q_NULLPTR));
+        readByteLabel->setText(QApplication::translate("Principal", "Puerto Cerrado", Q_NULLPTR));
         menu_Puerto->setTitle(QApplication::translate("Principal", "&Puerto", Q_NULLPTR));
     } // retranslateUi
 

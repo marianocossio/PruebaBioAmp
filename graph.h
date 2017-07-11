@@ -11,7 +11,7 @@ class Graph : public QOpenGLWidget
 public:
     Graph(QWidget *parent);
 
-    void addData(int data);
+    void addData(QVector<int> data);
 
 protected:
     void initializeGL();
@@ -19,7 +19,9 @@ protected:
     void paintGL();
 
 private:
-    QVector<int> signal;
+    QVector< QVector<int> > localSignals;
+
+    void printSignal(int signalIndex);
 };
 
 #endif // GRAPH_H

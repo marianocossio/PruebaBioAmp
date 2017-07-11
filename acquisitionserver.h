@@ -2,10 +2,12 @@
 #define ACQUISITIONSERVER_H
 
 #include <QThread>
-#include <QSerialPort>
-#include <QByteArray>
 #include <QMutex>
 #include <QWaitCondition>
+
+#include <QSerialPort>
+
+#include <QByteArray>
 
 class AcquisitionServer : public QThread
 {    
@@ -20,7 +22,7 @@ public:
     void write(QByteArray data);
 
 signals:
-    void dataReceived(char data);
+    void dataReceived(unsigned char data);
     void portOpened();
     void portClosed();
 

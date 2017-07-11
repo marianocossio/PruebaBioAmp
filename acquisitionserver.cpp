@@ -26,8 +26,8 @@ bool AcquisitionServer::startPort(QString portName)
     QMutexLocker locker(&mutex);
 
     portBioAmp.setPortName(portName);
-    portBioAmp.open(QSerialPort::ReadWrite);
     portBioAmp.setBaudRate(baudRate);
+    portBioAmp.open(QSerialPort::ReadWrite);
 
     result = portBioAmp.isOpen();
 
@@ -75,6 +75,13 @@ void AcquisitionServer::write(QByteArray data)
 void AcquisitionServer::setBaudRate(long baudRate)
 {
     this->baudRate = baudRate;
+
+    if (portBioAmp.isOpen())
+    {
+        portBioAmp.close();
+
+        startPort(portBioAmp.portName());
+    }
 }
 
 void AcquisitionServer::run()
@@ -85,27 +92,28 @@ void AcquisitionServer::run()
             return;
 
         bool bytesAvailable;
-        char *readBytes = new char;
-        int bytesRead;
 
         mutex.lock();
 
-        bytesAvailable = (portBioAmp.bytesAvailable() > 1);
+        bytesAvailable = (portBioAmp.bytesAvailable() >= 1);
 
         mutex.unlock();
 
         if (bytesAvailable)
         {
+            char *receivedBytes = new char;
+            int bytesRead;
+
             mutex.lock();
 
-            bytesRead = portBioAmp.read(readBytes,1);
+            bytesRead = portBioAmp.read(receivedBytes, 1);
 
             mutex.unlock();
 
             if (bytesRead != (-1))
-                emit dataReceived(*readBytes);
-        }
+                emit dataReceived(*((unsigned char*) receivedBytes));
 
-        delete readBytes;
+            delete receivedBytes;
+        }
     }
 }
