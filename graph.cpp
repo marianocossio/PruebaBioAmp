@@ -7,6 +7,16 @@ Graph::Graph(QWidget *parent = 0) : QOpenGLWidget(parent)
 
 void Graph::addData(QVector<int> data)
 {
+    if (data.size() != localSignals.size())
+    {
+        for (int index = 0; index < localSignals.size(); index++)
+            localSignals[index].clear();
+
+        localSignals.clear();
+
+        localSignals.resize(data.size());
+    }
+
     if (localSignals[0].size() >= width())
         for (int index = 0; index < localSignals.size(); index++)
             localSignals[index].clear();
@@ -65,8 +75,8 @@ void Graph::printSignal(int signalIndex)
 
     for (int i = 0; i < localSignals[signalIndex].size() - 1; i++)
     {
-        glVertex3f(i * 1.0f, localSignals[signalIndex][i] / (90000 * 1.0f), 0.0f);
-        glVertex3f((i + 1) * 1.0f, localSignals[signalIndex][i + 1] / (90000 * 1.0f), 0.0f);
+        glVertex3f(i * 1.0f, localSignals[signalIndex][i] / ((255 << 8) * 1.0f), 0.0f);
+        glVertex3f((i + 1) * 1.0f, localSignals[signalIndex][i + 1] / ((255 << 8) * 1.0f), 0.0f);
     }
 
     glEnd();

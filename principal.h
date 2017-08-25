@@ -36,6 +36,24 @@ private slots:
 
     void on_sendPushButton_clicked();
 
+    void on_channel1CB_toggled(bool checked);
+
+    void on_channel2CB_toggled(bool checked);
+
+    void on_channel3CB_toggled(bool checked);
+
+    void on_channel4CB_toggled(bool checked);
+
+    void on_channel5CB_toggled(bool checked);
+
+    void on_channel6CB_toggled(bool checked);
+
+    void on_channel7CB_toggled(bool checked);
+
+    void on_channel8CB_toggled(bool checked);
+
+    void on_testPB_clicked();
+
 protected:
     void resizeEvent(QResizeEvent *event);
 

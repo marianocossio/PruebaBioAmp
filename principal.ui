@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>468</width>
+    <width>595</width>
     <height>451</height>
    </rect>
   </property>
@@ -118,13 +118,130 @@
      </item>
     </layout>
    </widget>
+   <widget class="QCheckBox" name="channel1CB">
+    <property name="geometry">
+     <rect>
+      <x>491</x>
+      <y>1</y>
+      <width>77</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Canal 1</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="channel2CB">
+    <property name="geometry">
+     <rect>
+      <x>491</x>
+      <y>34</y>
+      <width>77</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Canal 2</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="channel4CB">
+    <property name="geometry">
+     <rect>
+      <x>491</x>
+      <y>100</y>
+      <width>77</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Canal 4</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="channel3CB">
+    <property name="geometry">
+     <rect>
+      <x>491</x>
+      <y>67</y>
+      <width>77</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Canal 3</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="channel7CB">
+    <property name="geometry">
+     <rect>
+      <x>491</x>
+      <y>199</y>
+      <width>77</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Canal 7</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="channel6CB">
+    <property name="geometry">
+     <rect>
+      <x>491</x>
+      <y>166</y>
+      <width>77</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Canal 6</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="channel5CB">
+    <property name="geometry">
+     <rect>
+      <x>491</x>
+      <y>133</y>
+      <width>77</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Canal 5</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="channel8CB">
+    <property name="geometry">
+     <rect>
+      <x>491</x>
+      <y>232</y>
+      <width>77</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Canal 8</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="testPB">
+    <property name="geometry">
+     <rect>
+      <x>490</x>
+      <y>300</y>
+      <width>61</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&amp;Test</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>468</width>
+     <width>595</width>
      <height>26</height>
     </rect>
    </property>

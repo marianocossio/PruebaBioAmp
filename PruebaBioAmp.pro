@@ -27,12 +27,18 @@ SOURCES += \
         main.cpp \
         principal.cpp \
     acquisitionserver.cpp \
-    graph.cpp
+    graph.cpp \
+    dataconditioner.cpp
 
 HEADERS += \
         principal.h \
     acquisitionserver.h \
-    graph.h
+    graph.h \
+    dataconditioner.h
 
 FORMS += \
         principal.ui
+
+RESOURCES += \
+    fonts.qrc
+
